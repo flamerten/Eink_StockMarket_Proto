@@ -59,10 +59,8 @@ void setup()
 
     delay(1000);
 
-    // update_time(&datetime_now);
-    datetime_now.year = 2024;
-    datetime_now.month = 12;
-    datetime_now.day = 3;
+    //Failed timeupdate
+    if (!update_time(&datetime_now)) return;
 
     update_polygon_param_date(
         &datetime_now,
@@ -78,10 +76,13 @@ void setup()
     // Stock Market doesnt work on weekends?
     String ticker = "AAPL"; //Apple
 
-    query_stock_market(
+    uint32_t size_res = query_stock_market(
         &polygon_params,
         ticker, 1,
         results, MAX_BAR_NUMBER);
+
+    //Failed stock market update
+    if (size_res == 0) return;
 
     Serial.println("Query Done");
 

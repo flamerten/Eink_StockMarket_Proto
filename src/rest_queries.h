@@ -56,7 +56,7 @@ typedef struct AggResult{
     uint32_t t_ts_agg_window; //unix timestamp
 } AggResult_t;
 
-void update_time(Datetime_t* datetime);
+bool update_time(Datetime_t* datetime);
 
 String get_timespan_str(Timespan_t timespan);
 

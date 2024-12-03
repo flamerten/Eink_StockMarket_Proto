@@ -122,7 +122,7 @@ static String http_GET_request(const char* serverName) {
  * 
  * @param datetime 
  */
-void update_time(Datetime_t* datetime)
+bool update_time(Datetime_t* datetime)
 {       
     int8_t max_tc_updates = 5;
 
@@ -132,7 +132,7 @@ void update_time(Datetime_t* datetime)
         if(max_tc_updates <= 0){
             Serial.println("Time Client failed to update"); //Simply use RTC
             datetime->error = true;
-            return;
+            return false;
         }
     }
 
@@ -159,7 +159,8 @@ void update_time(Datetime_t* datetime)
     datetime->year = year.toInt();
     datetime->month = month.toInt();
     datetime->day = day.toInt();
-  
+
+    return true;
 }
 
 String get_timespan_str(Timespan_t timespan)
